@@ -99,14 +99,13 @@ def test_singularity_container_from_specs(specs, bash_test_file):
             return  # do not build and test because nothing has changed
 
     logger.info("building singularity image")
-    filename = os.path.join(sr_dir,  "Singularity." + intname)
+    filename = os.path.join(sr_dir, "Singularity." + intname)
     with open(filename, 'w') as fp:
         fp.write(sr)
 
     client = get_singularity_client()
     img = client.build(
-        recipe=filename,
-        image=os.path.join(sr_dir, intname + ".sqsh"))
+        recipe=filename, image=os.path.join(sr_dir, intname + ".sqsh"))
 
     bash_test_file = posixpath.join("/testscripts", bash_test_file)
     test_cmd = "bash " + bash_test_file
@@ -132,8 +131,8 @@ def _prune_dockerfile(string, comment_char="#"):
     json_removed = '\n\n'.join(string.split('\n\n')[:-1])
     json_removed = "".join(json_removed.split())
     return '\n'.join(
-        row for row in json_removed.split('\n') if not
-        row.startswith(comment_char) and row)
+        row for row in json_removed.split('\n')
+        if not row.startswith(comment_char) and row)
 
 
 def _dockerfiles_equivalent(df_a, df_b):

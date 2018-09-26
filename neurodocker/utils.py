@@ -126,11 +126,13 @@ def set_log_level(level):
     level: {'debug', 'info', 'warning', 'error', 'critical}
         The level at which to print messages. Case-insensitive.
     """
-    logging_levels = {'DEBUG': logging.DEBUG,
-                      'INFO': logging.INFO,
-                      'WARNING': logging.WARNING,
-                      'ERROR': logging.ERROR,
-                      'CRITICAL': logging.CRITICAL}
+    logging_levels = {
+        'DEBUG': logging.DEBUG,
+        'INFO': logging.INFO,
+        'WARNING': logging.WARNING,
+        'ERROR': logging.ERROR,
+        'CRITICAL': logging.CRITICAL
+    }
     try:
         level = logging_levels[level.upper()]
         logger.setLevel(level)

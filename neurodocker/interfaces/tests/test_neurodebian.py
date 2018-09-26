@@ -4,20 +4,17 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestNeuroDebian(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'ubuntu:16.04'),
-                (
-                    'neurodebian',
-                    {
-                        'os_codename': 'stretch',
-                        'server': 'usa-nh',
-                        'full': True,
-                    }
-                ),
+                ('neurodebian', {
+                    'os_codename': 'stretch',
+                    'server': 'usa-nh',
+                    'full': True,
+                }),
                 ('install', ['dcm2niix']),
                 ('user', 'neuro'),
             ]
@@ -29,17 +26,15 @@ class TestNeuroDebian(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'docker://ubuntu:16.04'),
-                (
-                    'neurodebian',
-                    {
-                        'os_codename': 'stretch',
-                        'server': 'usa-nh',
-                        'full': True,
-                    }
-                ),
+                ('neurodebian', {
+                    'os_codename': 'stretch',
+                    'server': 'usa-nh',
+                    'full': True,
+                }),
                 ('install', ['dcm2niix']),
                 ('user', 'neuro'),
             ]

@@ -4,13 +4,16 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestDcm2niix(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'centos:7'),
-                ('dcm2niix', {'version': 'master', 'method': 'source'}),
+                ('dcm2niix', {
+                    'version': 'master',
+                    'method': 'source'
+                }),
                 ('user', 'neuro'),
             ],
         }
@@ -21,10 +24,14 @@ class TestDcm2niix(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'docker://centos:7'),
-                ('dcm2niix', {'version': 'master', 'method': 'source'}),
+                ('dcm2niix', {
+                    'version': 'master',
+                    'method': 'source'
+                }),
                 ('user', 'neuro'),
             ],
         }

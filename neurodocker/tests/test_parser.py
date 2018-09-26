@@ -24,9 +24,12 @@ class TestSpecsParser(object):
             _SpecsParser(specs)
 
         # Invalid top-level key.
-        specs = {'pkg_manager': 'apt',
-                 'instructions': [('base', 'ubuntu:17.04'),
-                                  ('fake_software', 'fake_val')],}
+        specs = {
+            'pkg_manager':
+            'apt',
+            'instructions': [('base', 'ubuntu:17.04'),
+                             ('fake_software', 'fake_val')],
+        }
         with pytest.raises(KeyError) as e:
             _SpecsParser(specs)
         assert 'fake_software' in str(e.value)

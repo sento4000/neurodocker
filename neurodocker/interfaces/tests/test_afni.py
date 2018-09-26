@@ -7,14 +7,17 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestAFNI(object):
-
     def test_docker(self):
         """Install latest AFNI binaries on Debian stretch."""
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'debian:stretch'),
-                ('afni', {'version': 'latest', 'method': 'binaries'}),
+                ('afni', {
+                    'version': 'latest',
+                    'method': 'binaries'
+                }),
                 ('user', 'neuro'),
             ],
         }
@@ -25,10 +28,14 @@ class TestAFNI(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'docker://debian:stretch'),
-                ('afni', {'version': 'latest', 'method': 'binaries'}),
+                ('afni', {
+                    'version': 'latest',
+                    'method': 'binaries'
+                }),
                 ('user', 'neuro'),
             ],
         }

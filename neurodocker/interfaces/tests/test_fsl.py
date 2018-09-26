@@ -4,13 +4,15 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestFSL(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'centos:7'),
-                ('fsl', {'version': '5.0.10'}),
+                ('fsl', {
+                    'version': '5.0.10'
+                }),
                 ('user', 'neuro'),
             ]
         }
@@ -21,10 +23,13 @@ class TestFSL(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'docker://centos:7'),
-                ('fsl', {'version': '5.0.10'}),
+                ('fsl', {
+                    'version': '5.0.10'
+                }),
                 ('user', 'neuro'),
             ]
         }

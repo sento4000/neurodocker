@@ -4,13 +4,15 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestMRtrix3(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'centos:7'),
-                ('mrtrix3', {'version': '3.0_RC3'}),
+                ('mrtrix3', {
+                    'version': '3.0_RC3'
+                }),
                 ('user', 'neuro'),
             ],
         }
@@ -21,10 +23,13 @@ class TestMRtrix3(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'docker://centos:7'),
-                ('mrtrix3', {'version': '3.0_RC2'}),
+                ('mrtrix3', {
+                    'version': '3.0_RC2'
+                }),
                 ('user', 'neuro'),
             ],
         }

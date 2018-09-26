@@ -5,13 +5,15 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestMINC(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'ubuntu:xenial'),
-                ('minc', {'version': '1.9.15'}),
+                ('minc', {
+                    'version': '1.9.15'
+                }),
                 ('user', 'neuro'),
             ]
         }
@@ -22,10 +24,13 @@ class TestMINC(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'docker://centos:7'),
-                ('minc', {'version': '1.9.15'}),
+                ('minc', {
+                    'version': '1.9.15'
+                }),
                 ('user', 'neuro'),
             ]
         }

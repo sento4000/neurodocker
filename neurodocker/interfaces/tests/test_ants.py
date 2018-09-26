@@ -7,13 +7,16 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestANTs(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'centos:7'),
-                ('ants', {'version': '2.2.0', 'method': 'binaries'}),
+                ('ants', {
+                    'version': '2.2.0',
+                    'method': 'binaries'
+                }),
                 ('user', 'neuro'),
             ]
         }
@@ -24,10 +27,13 @@ class TestANTs(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'yum',
+            'pkg_manager':
+            'yum',
             'instructions': [
                 ('base', 'docker://centos:7'),
-                ('ants', {'version': '2.2.0'}),
+                ('ants', {
+                    'version': '2.2.0'
+                }),
                 ('user', 'neuro'),
             ]
         }

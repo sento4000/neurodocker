@@ -4,13 +4,15 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestSPM(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'ubuntu:18.04'),
-                ('spm12', {'version': 'dev'}),
+                ('spm12', {
+                    'version': 'dev'
+                }),
                 ('user', 'neuro'),
             ],
         }
@@ -21,10 +23,13 @@ class TestSPM(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'docker://ubuntu:16.04'),
-                ('spm12', {'version': 'r7219'}),
+                ('spm12', {
+                    'version': 'r7219'
+                }),
                 ('user', 'neuro'),
             ],
         }

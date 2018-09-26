@@ -13,8 +13,8 @@ def read(*parts):
 
 def find_version(*file_paths):
     version_file = read(*file_paths)
-    version_match = re.search(
-        r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
     if version_match:
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
@@ -53,15 +53,12 @@ def main():
         keywords='containers neuroimaging reproducibility research',
         packages=find_packages(),
         package_data={
-            'neurodocker': [
-                'templates/*.yaml',
-                'reprozip/utils/reprozip_trace_runner.sh']
+            'neurodocker':
+            ['templates/*.yaml', 'reprozip/utils/reprozip_trace_runner.sh']
         },
         install_requires=requirements,
         entry_points={
-            "console_scripts": [
-                "neurodocker=neurodocker.neurodocker:main"
-            ],
+            "console_scripts": ["neurodocker=neurodocker.neurodocker:main"],
         },
         python_requires='>=3.5',
         extras_require={

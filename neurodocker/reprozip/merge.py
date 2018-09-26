@@ -120,8 +120,11 @@ def _combine_traces(traces, out_dir):
     """
     from reprozip.main import combine
 
-    args = _Namespace(traces=traces, dir=out_dir, identify_packages=False,
-                      find_inputs_outputs=False)
+    args = _Namespace(
+        traces=traces,
+        dir=out_dir,
+        identify_packages=False,
+        find_inputs_outputs=False)
     combine(args)
 
     original_config = os.path.join(os.path.dirname(traces[0]), 'config.yml')

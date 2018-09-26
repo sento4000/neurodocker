@@ -4,13 +4,15 @@ from neurodocker.interfaces.tests import utils
 
 
 class TestConvert3D(object):
-
     def test_docker(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'ubuntu:18.04'),
-                ('convert3d', {'version': '1.0.0'}),
+                ('convert3d', {
+                    'version': '1.0.0'
+                }),
                 ('user', 'neuro'),
             ]
         }
@@ -21,10 +23,13 @@ class TestConvert3D(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'docker://ubuntu:16.04'),
-                ('convert3d', {'version': '1.0.0'}),
+                ('convert3d', {
+                    'version': '1.0.0'
+                }),
                 ('user', 'neuro'),
             ]
         }

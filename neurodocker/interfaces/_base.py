@@ -50,7 +50,6 @@ deb_install = jinja2.Template(deb_install)
 
 
 def _load_global_specs():
-
     def load_global_specs(glob_pattern):
         import glob
 
@@ -124,10 +123,8 @@ class _Resolver:
 
     def check_version_has_method(self, version, method):
         if not self.version_has_method(version, method):
-            raise ValueError(
-                "version '{}' does not have method '{}'"
-                .format(version, method)
-            )
+            raise ValueError("version '{}' does not have method '{}'".format(
+                version, method))
 
     def version_method_has_instructions(self, version, method):
         version_key = self.get_version_key(version)
@@ -138,8 +135,7 @@ class _Resolver:
         if not self.version_method_has_instructions(version, method):
             raise ValueError(
                 "installation method '{}' for version '{}' does not have an"
-                " 'instructions' key.".format(method, version)
-            )
+                " 'instructions' key.".format(method, version))
 
     def binaries_has_url(self, version):
         version_key = self.get_version_key(version)
@@ -149,22 +145,19 @@ class _Resolver:
                 return version in urls
             except KeyError:
                 raise ValueError(
-                    "no binary URLs defined for version '{}'".format(version)
-                )
+                    "no binary URLs defined for version '{}'".format(version))
         else:
             raise ValueError(
-                "no binary installation method defined for version '{}"
-                .format(version)
-            )
+                "no binary installation method defined for version '{}".format(
+                    version))
 
     def check_binaries_has_url(self, version):
         if not self.binaries_has_url(version):
             version_key = self.get_version_key(version)
             valid_vers = self._d[version_key]['binaries']['urls']
             raise ValueError(
-                "URL not found for version '{}'. Valid versions are {}"
-                .format(version, ', '.join(valid_vers))
-            )
+                "URL not found for version '{}'. Valid versions are {}".format(
+                    version, ', '.join(valid_vers)))
 
     def binaries_url(self, version):
         self.check_binaries_has_url(version)
@@ -175,8 +168,13 @@ class _Resolver:
 class _BaseInterface:
     """Base class for interface objects."""
 
-    def __init__(self, name, version, pkg_manager, method='binaries',
-                 install_path=None, **kwargs):
+    def __init__(self,
+                 name,
+                 version,
+                 pkg_manager,
+                 method='binaries',
+                 install_path=None,
+                 **kwargs):
         self._name = name
         self._version = version
         self._pkg_manager = pkg_manager
@@ -185,24 +183,21 @@ class _BaseInterface:
         self.__dict__.update(**kwargs)
 
         if not _interface_exists_in_yaml(self._name):
-            raise ValueError(
-                "No YAML entry for package '{}'".format(self._name)
-            )
+            raise ValueError("No YAML entry for package '{}'".format(
+                self._name))
         self._resolver = _Resolver(_global_specs[self._name])
 
         self._version_key = self._resolver.get_version_key(self._version)
         self._resolver.check_version_exists(self._version)
         self._resolver.check_version_has_method(self._version, self._method)
         self._resolver.check_version_method_has_instructions(
-            self._version, self._method
-        )
+            self._version, self._method)
 
         if method == 'binaries':
             self.binaries_url = self._resolver.binaries_url(self._version)
 
         self._instance_specs = deepcopy(
-            _global_specs[self._name][self._version_key][self._method]
-        )
+            _global_specs[self._name][self._version_key][self._method])
 
         self._run = self._instance_specs['instructions']
         self._dependencies = self._get_dependencies()
@@ -281,8 +276,7 @@ class _BaseInterface:
         if not self.dependencies:
             raise ValueError(
                 "No dependencies to install. Add dependencies or remove the"
-                " `install_dependencies()` call in the package template."
-            )
+                " `install_dependencies()` call in the package template.")
         pkgs = sorted(self.dependencies) if sort else self.dependencies
 
         if self.pkg_manager == 'apt':
@@ -291,9 +285,7 @@ class _BaseInterface:
             apt_opts = self.__dict__.get('apt_opts', None)
             if apt_opts is not None:
                 out = apt_install.render(
-                    pkgs=pkgs,
-                    apt_opts=apt_opts,
-                    sort=True)
+                    pkgs=pkgs, apt_opts=apt_opts, sort=True)
             else:
                 out = apt_install.render(pkgs=pkgs, sort=True)
 
@@ -301,9 +293,7 @@ class _BaseInterface:
             yum_opts = self.__dict__.get('yum_opts', None)
             if yum_opts is not None:
                 out = yum_install.render(
-                    pkgs=pkgs,
-                    yum_opts=yum_opts,
-                    sort=True)
+                    pkgs=pkgs, yum_opts=yum_opts, sort=True)
             else:
                 out = yum_install.render(pkgs=pkgs, sort=True)
 
@@ -314,8 +304,7 @@ class _BaseInterface:
         if not debs:
             raise ValueError(
                 "No .deb files to install. Add .deb files or remove the"
-                " `install_debs()` call in the package template."
-            )
+                " `install_debs()` call in the package template.")
         return deb_install.render(debs=debs)
 
     def render_run(self):
@@ -324,7 +313,10 @@ class _BaseInterface:
     def render_env(self):
         """Return dictionary with rendered keys and values."""
         return {
-            jinja2.Template(k).render({self.name: self}):
-            jinja2.Template(v).render({self.name: self})
+            jinja2.Template(k).render({
+                self.name: self
+            }): jinja2.Template(v).render({
+                self.name: self
+            })
             for k, v in self.env.items()
         } if self.env else self.env

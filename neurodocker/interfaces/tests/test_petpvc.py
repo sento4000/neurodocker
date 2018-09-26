@@ -10,10 +10,13 @@ class TestPETPVC(object):
     def test_docker(self):
         """Install PETPVC binaries on Ubuntu Xenial."""
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'ubuntu:xenial'),
-                ('petpvc', {'version': '1.2.2'}),
+                ('petpvc', {
+                    'version': '1.2.2'
+                }),
                 ('user', 'neuro'),
             ]
         }
@@ -24,10 +27,13 @@ class TestPETPVC(object):
 
     def test_singularity(self):
         specs = {
-            'pkg_manager': 'apt',
+            'pkg_manager':
+            'apt',
             'instructions': [
                 ('base', 'docker://ubuntu:xenial'),
-                ('petpvc', {'version': '1.2.2'}),
+                ('petpvc', {
+                    'version': '1.2.2'
+                }),
                 ('user', 'neuro'),
             ]
         }
