@@ -21,6 +21,10 @@ generic:
     env:
       FSLDIR: "{{ fsl.install_path }}"
       PATH: "{{ fsl.install_path }}/bin:$PATH"
+      FSLOUTPUTTYPE: "NIFTI_GZ"
+      FSLMULTIFILEQUIT: "TRUE"
+      FSLTCLSH: "{{ fsl.install_path }}/bin/fsltclsh"
+      FSLWISH: "{{ fsl.install_path }}/bin/fslwish"
     instructions: |
       {{ fsl.install_dependencies() }}
       echo "Downloading FSL ..."
